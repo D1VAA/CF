@@ -1,9 +1,13 @@
+/* eslint-disable camelcase */
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import './globals.css'
 import { ReactNode } from 'react'
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Roboto({
+  subsets: ['latin'],
+  weight: ['100', '300', '400', '500', '700'],
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -12,15 +16,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body
-        className={
-          inter.className +
-          ' bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950'
-        }
-      >
-        {children}
-      </body>
+    <html lang="pt-br">
+      <body className={font.className}>{children}</body>
     </html>
   )
 }

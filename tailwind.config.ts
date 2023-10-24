@@ -16,8 +16,11 @@ const config: Config = {
       colors: {
         primary: '#0a0613',
         secondary: '#401d5a',
-        third: '#490e7d'
-      }
+        third: '#490e7d',
+      },
+    },
+    fontFamily: {
+      roboto: ['Roboto', 'sans-serif'],
     },
   },
   plugins: [],
