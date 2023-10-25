@@ -1,7 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import json
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/update', methods=['GET'])
 def updateFile():
@@ -21,13 +23,18 @@ def CitiesFile():
     return citiesList
 l = CitiesFile()
 
+@app.route('/getlist', methods=['GET'])
+def getlist(length=5):
+    return jsonify(l[:5])
+
+@app.route('/filter/<word>', methods=['GET'])
 def FilterList(word, listLenght=5):
     try:
         listLenght = int(request.args.get('length'))
     except Exception:
         pass
     filtered = list(filter(lambda x: word.lower() in x.lower(), l))
-    return filtered[:listLenght]
+    return jsonify(filtered[:listLenght])
 
 if __name__ == '__main__':
     app.run(debug=True, port=9999)
