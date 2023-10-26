@@ -1,3 +1,4 @@
+'use client'
 import * as Tabs from '@radix-ui/react-tabs'
 import { ReactNode } from 'react'
 
@@ -10,6 +11,7 @@ type TriggersProps = Tabs.TabsProps & {
     label: string
     value: string
     content: ReactNode
+    contentClassName: string
   }[]
 }
 
@@ -22,7 +24,7 @@ function Root({ children, ...props }: RootProps) {
   return <Tabs.Root {...props}>{children}</Tabs.Root>
 }
 
-function Triggers({ items, ...props }: TriggersProps) {
+function Triggers({ items, contentClassName, ...props }: TriggersProps) {
   return (
     <>
       <Tabs.List {...props} className="flex h-12 w-96">
@@ -36,12 +38,12 @@ function Triggers({ items, ...props }: TriggersProps) {
           </Tabs.Trigger>
         ))}
       </Tabs.List>
-      <div className="h-full w-full p-5">
+      <div className={'h-full w-full p-5 ' + contentClassName}>
         {items.map(({ value, content }) => (
           <Tabs.Content
             key={value + value}
             value={value}
-            className="flex flex-row justify-center text-lg font-thin text-slate-600"
+            className="flex justify-start text-lg font-thin text-slate-600"
           >
             {content}
           </Tabs.Content>

@@ -1,13 +1,13 @@
 'use client'
 import { MyTabs } from './components/MyTabs'
-import { FreightCalc } from './components/Freight'
+import { LiveSelect } from './components/LiveSelect'
 
 const items = [
   {
     label: 'Cálculos',
     value: 'calc',
     title: 'Calculo de Frete',
-    content: <FreightCalc />,
+    content: <CalcTab />,
   },
   {
     label: 'Mapa',
@@ -23,10 +23,18 @@ const items = [
   },
 ]
 
+function CalcTab() {
+  return (
+    <main>
+      <LiveSelect label="Origem" />
+      <LiveSelect label="Destino" />
+    </main>
+  )
+}
+
 export default function Home() {
   return (
     <main className="flex h-screen w-screen flex-col items-center bg-white">
-      {/* <embed src="https://qualp.com.br/" className="h-full w-8/12" /> */}
       <MyTabs.Root defaultValue="calc">
         <MyTabs.Triggers items={items} />
       </MyTabs.Root>
