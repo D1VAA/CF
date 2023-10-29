@@ -11,7 +11,6 @@ type TriggersProps = Tabs.TabsProps & {
     label: string
     value: string
     content: ReactNode
-    contentClassName: string
   }[]
 }
 
@@ -24,10 +23,10 @@ function Root({ children, ...props }: RootProps) {
   return <Tabs.Root {...props}>{children}</Tabs.Root>
 }
 
-function Triggers({ items, contentClassName, ...props }: TriggersProps) {
+function Triggers({ items, ...props }: TriggersProps) {
   return (
     <>
-      <Tabs.List {...props} className="flex h-12 w-96">
+      <Tabs.List {...props}>
         {items.map(({ label, value }) => (
           <Tabs.Trigger
             key={value}
@@ -38,7 +37,7 @@ function Triggers({ items, contentClassName, ...props }: TriggersProps) {
           </Tabs.Trigger>
         ))}
       </Tabs.List>
-      <div className={'h-full w-full p-5 ' + contentClassName}>
+      <div className={'h-full w-full p-5 '}>
         {items.map(({ value, content }) => (
           <Tabs.Content
             key={value + value}

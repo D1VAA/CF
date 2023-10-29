@@ -54,7 +54,7 @@ export function LiveSelect({ label }: { label: string }) {
       <h2>{label}</h2>
       <input
         type="text"
-        className="peer/search w-full rounded-full border-2 border-indigo-900/75 px-5 py-2 text-lg font-thin text-slate-700 outline-none"
+        className="peer/search w-full rounded-xl border border-indigo-900/75 px-5 py-2 text-lg font-thin text-slate-700 outline-none"
         placeholder="Search"
         ref={inputRef}
         onChange={(e) => {
