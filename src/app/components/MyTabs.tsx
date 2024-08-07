@@ -25,29 +25,27 @@ function Root({ children, ...props }: RootProps) {
 
 function Triggers({ items, ...props }: TriggersProps) {
   return (
-    <>
+    <div className="h-full overflow-hidden">
       <Tabs.List {...props}>
         {items.map(({ label, value }) => (
           <Tabs.Trigger
             key={value}
             value={value}
-            className="w-1/3 select-none border-b-2 text-xl font-extralight text-indigo-950 data-[state=active]:border-b-violet-900"
+            className="w-1/3 select-none border-b-2 text-xl text-sky-950 data-[state=active]:border-b-sky-900"
           >
             {label}
           </Tabs.Trigger>
         ))}
       </Tabs.List>
-      <div className={'h-full w-full p-5 '}>
-        {items.map(({ value, content }) => (
-          <Tabs.Content
-            key={value + value}
-            value={value}
-            className="flex justify-start text-lg font-thin text-slate-600"
-          >
-            {content}
-          </Tabs.Content>
-        ))}
-      </div>
-    </>
+      {items.map(({ value, content }) => (
+        <Tabs.Content
+          key={value + value}
+          value={value}
+          className="h-full text-lg text-slate-500"
+        >
+          {content}
+        </Tabs.Content>
+      ))}
+    </div>
   )
 }

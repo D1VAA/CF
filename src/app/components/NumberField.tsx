@@ -27,9 +27,16 @@ const possibleFields = {
 type NumberFieldProps = {
   label: string
   type: 'productCost' | 'vehicleCost' | 'weight' | 'adv'
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export function NumberField({ label, type }: NumberFieldProps) {
+export function NumberField({
+  label,
+  type,
+  value,
+  onChange,
+}: NumberFieldProps) {
   const Current = possibleFields[type]
   return (
     <div className="flex w-fit items-center overflow-hidden rounded-full border border-indigo-900/30 px-3 py-0.5">
@@ -40,6 +47,8 @@ export function NumberField({ label, type }: NumberFieldProps) {
           <span>{Current.measure}</span>
           <input
             type="text"
+            value={value}
+            onChange={onChange}
             className="ml-2 border-none outline-none"
             placeholder="0,00"
           />

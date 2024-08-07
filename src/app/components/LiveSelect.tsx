@@ -4,7 +4,13 @@ import { CSSProperties, useEffect, useRef, useState } from 'react'
 import { FixedSizeList } from 'react-window'
 import { IBGEDistrict } from '../types/API'
 
-export function LiveSelect({ label }: { label: string }) {
+interface LiveSelectProps {
+  label: string
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export function LiveSelect({ label, value, onChange }: LiveSelectProps) {
   const [districts, setDistricts] = useState<IBGEDistrict[]>()
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<FixedSizeList>(null)
@@ -22,14 +28,18 @@ export function LiveSelect({ label }: { label: string }) {
         className={
           'flex cursor-pointer gap-x-1 rounded-md p-1 px-3 hover:bg-slate-500/10' +
           (currentDistrict.nome.toLowerCase().includes(inputValue)
-            ? ' bg-indigo-700/40 font-bold text-white hover:bg-indigo-400/50'
+            ? ' bg-sky-700/40 font-bold text-white hover:bg-sky-400/50'
             : '')
         }
         onClick={() => {
           if (inputRef.current === null) return
-          const sigla =
-            currentDistrict.municipio.microrregiao.mesorregiao.UF.sigla
           inputRef.current.value = `${currentDistrict.nome}, ${sigla}`
+          onChange({
+            target: {
+              name: inputRef.current.name,
+              value: inputRef.current.value,
+            },
+          } as React.ChangeEvent<HTMLInputElement>)
         }}
       >
         <span>{currentDistrict.nome},</span>
@@ -51,13 +61,15 @@ export function LiveSelect({ label }: { label: string }) {
   if (districts === undefined) return <div>Loading</div>
   return (
     <div className="relative h-full w-fit">
-      <h2>{label}</h2>
+      <h2 className="font-normal tracking-wide text-sky-950">{label}</h2>
       <input
         type="text"
-        className="peer/search w-full rounded-xl border border-indigo-900/75 px-5 py-2 text-lg font-thin text-slate-700 outline-none"
+        className="peer/search w-full rounded-xl border border-sky-900/75 px-5 py-2 text-lg text-slate-700 outline-none"
         placeholder="Search"
         ref={inputRef}
+        value={value}
         onChange={(e) => {
+          onChange(e)
           const value = e.target.value
           const itemIndex = districts.findIndex((item) => {
             const {
